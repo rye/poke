@@ -1,6 +1,8 @@
 #[tokio::main]
 async fn main() {
-	let mut server = poke::Server::new();
+	pretty_env_logger::init();
+
+	let mut server = slowpoke::Server::new();
 	server.initialize();
 	server.serve().await
 }
