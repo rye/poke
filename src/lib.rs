@@ -22,7 +22,7 @@ impl Server {
 
 		let bind_addr = (bind, port).into();
 
-		let router = axum::Router::new().route("/ping", axum::routing::get(routes::ping::ping));
+		let router = axum::Router::new().route("/ping", axum::routing::get(routes::ping));
 
 		axum::Server::bind(&bind_addr)
 			.serve(router.into_make_service())
