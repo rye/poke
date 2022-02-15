@@ -4,13 +4,13 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-# TODO: Shrink tokio feature set?
-tokio = { version = "1.16.1", features = ["full"] }
 axum = "0.4.5"
 config = "0.11.0"
 hyper = "0.14.17"
 serde = { version = "1.0.136", features = ["derive"] }
 thiserror = "1.0.30"
+# TODO: Shrink tokio feature set?
+tokio = { version = "1.16.1", features = ["full"] }
 tower = "0.4.11"
 tower-service = "0.3.1"
 tower-http = "0.2.2"
