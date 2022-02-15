@@ -1,5 +1,3 @@
-use std::{net::IpAddr, str::FromStr};
-
 use axum::{routing::get, Router};
 
 mod config;
@@ -22,10 +20,7 @@ impl Server {
 
 	/// Runs the server.
 	pub async fn serve(&mut self) {
-		let bind = IpAddr::from_str("::0").unwrap();
-		let port = 3030;
-
-		let bind_addr = (bind, port).into();
+		let bind_addr = self.config.bind_addr();
 
 		let router = Router::new().route("/ping", get(routes::ping));
 

@@ -10,6 +10,12 @@ pub(crate) struct Server {
 	port: u16,
 }
 
+impl Server {
+	pub(crate) fn bind_addr(&self) -> std::net::SocketAddr {
+		(self.host, self.port).into()
+	}
+}
+
 pub(crate) fn get_config() -> Result<Config, config::ConfigError> {
 	let mut config = Config::default();
 
