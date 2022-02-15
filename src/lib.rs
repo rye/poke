@@ -37,7 +37,16 @@ impl Server {
 	/// Runs the server.
 	pub async fn serve(&mut self) {
 		let bind = IpAddr::from_str("::0").unwrap();
-		warp::serve(self.filters()).run((bind, 3030)).await
+		let port = 3030;
+
+		let bind_addr = (bind, port).into();
+
+		let router = axum::Router::new().route("/ping", axum::routing::get(routes::ping::ping));
+
+		axum::Server::bind(&bind_addr)
+			.serve(router.into_make_service())
+			.await
+			.unwrap();
 	}
 }
 
