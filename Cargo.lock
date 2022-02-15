@@ -623,6 +623,7 @@ version = "0.1.0"
 dependencies = [
  "axum",
  "config",
+ "hyper",
  "serde 1.0.136",
  "thiserror",
  "tokio",
