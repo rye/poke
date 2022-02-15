@@ -15,25 +15,6 @@ impl Server {
 		self
 	}
 
-	/// Sets up the filters to use when handling requests.
-	///
-	/// Any work done here is done at startup before the server begins serving requests.
-	#[deprecated = "warp is being removed"]
-	fn filters(
-		&self,
-	) -> impl warp::Filter<Extract = impl warp::Reply, Error = warp::Rejection> + Clone {
-		use warp::Filter;
-
-		let logger = warp::log("slowpoke");
-
-		let ping_filter = warp::path!("ping")
-			.then(routes::ping::ping)
-			.with(logger)
-			.boxed();
-
-		ping_filter
-	}
-
 	/// Runs the server.
 	pub async fn serve(&mut self) {
 		let bind = IpAddr::from_str("::0").unwrap();
