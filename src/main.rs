@@ -17,10 +17,13 @@ impl Server {
 	}
 
 	/// Runs the server.
-	pub(crate) async fn serve(&mut self) -> Result<(), RuntimeError> {
+	pub(crate) async fn serve(
+		&mut self,
+		webhook_config: &config::WebhookSet,
+	) -> Result<(), RuntimeError> {
 		let bind_addr = self.config.bind_addr();
 
-		let router = routes::router();
+		let router = routes::router(webhook_config);
 
 		Ok(
 			axum::Server::bind(&bind_addr)
@@ -46,6 +49,9 @@ pub enum ConfigError {
 
 	#[error("server configuration error")]
 	Server(::config::ConfigError),
+
+	#[error("webhook configuration error")]
+	Webhook(::config::ConfigError),
 }
 
 #[tokio::main]
@@ -57,7 +63,10 @@ async fn main() -> Result<(), RuntimeError> {
 	let server_config: config::Server =
 		config::server_config(&config).map_err(ConfigError::Server)?;
 
+	let webhook_config: config::WebhookSet =
+		config::webhook_config(&config).map_err(ConfigError::Webhook)?;
+
 	let mut server = Server::new(server_config);
 	server.initialize();
-	server.serve().await
+	server.serve(&webhook_config).await
 }
