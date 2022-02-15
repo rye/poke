@@ -1,5 +1,7 @@
 use std::{net::IpAddr, str::FromStr};
 
+use axum::{routing::get, Router};
+
 mod routes;
 
 pub struct Server {}
@@ -22,7 +24,7 @@ impl Server {
 
 		let bind_addr = (bind, port).into();
 
-		let router = axum::Router::new().route("/ping", axum::routing::get(routes::ping));
+		let router = Router::new().route("/ping", get(routes::ping));
 
 		axum::Server::bind(&bind_addr)
 			.serve(router.into_make_service())
