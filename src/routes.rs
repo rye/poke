@@ -1,7 +1,7 @@
-use axum::{routing::get, Router};
+use axum::{response::IntoResponse, routing::get, Router};
 
 /// Replies with `"pong"`
-pub(crate) async fn ping() -> String {
+pub(crate) async fn ping() -> impl IntoResponse {
 	"pong".to_string()
 }
 
