@@ -2,6 +2,7 @@ use std::{net::IpAddr, str::FromStr};
 
 use axum::{routing::get, Router};
 
+mod config;
 mod routes;
 
 pub struct Server {}
