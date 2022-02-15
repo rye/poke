@@ -5,12 +5,14 @@ use axum::{routing::get, Router};
 mod config;
 mod routes;
 
-pub struct Server {}
+pub struct Server {
+	config: config::Server,
+}
 
 impl Server {
 	/// Initializes the server using the [`Default`] implementation
-	pub fn new() -> Self {
-		Self::default()
+	pub fn new(config: config::Server) -> Self {
+		Self { config }
 	}
 
 	/// Performs any startup tasks.
@@ -34,12 +36,6 @@ impl Server {
 	}
 }
 
-impl Default for Server {
-	fn default() -> Self {
-		Self {}
-	}
-}
-
 #[tokio::main]
 async fn main() {
 	tracing_subscriber::fmt::init();
@@ -49,7 +45,7 @@ async fn main() {
 	let server_config: config::Server =
 		config::server_config(&config).expect("failed to get server config key");
 
-	let mut server = Server::new();
+	let mut server = Server::new(server_config);
 	server.initialize();
 	server.serve().await
 }
