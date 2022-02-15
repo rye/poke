@@ -44,6 +44,8 @@ impl Default for Server {
 async fn main() {
 	tracing_subscriber::fmt::init();
 
+	let config = config::get_config().expect("failed to load config");
+
 	let mut server = Server::new();
 	server.initialize();
 	server.serve().await
