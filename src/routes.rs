@@ -6,7 +6,5 @@ pub(crate) async fn ping() -> String {
 }
 
 pub(crate) fn router() -> axum::Router {
-	let router = Router::new().route("/ping", get(ping));
-
-	router
+	Router::new().route("/ping", get(ping))
 }
