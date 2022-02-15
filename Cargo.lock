@@ -760,7 +760,6 @@ name = "slowpoke"
 version = "0.1.0"
 dependencies = [
  "axum",
- "log",
  "tokio",
  "tower",
  "tower-http",
