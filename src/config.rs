@@ -2,8 +2,6 @@ use std::net::IpAddr;
 
 use config::Config;
 
-use serde::Deserialize;
-
 #[derive(serde::Deserialize)]
 pub(crate) struct Server {
 	host: IpAddr,
