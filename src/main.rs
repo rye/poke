@@ -10,7 +10,7 @@ pub struct Server {}
 impl Server {
 	/// Initializes the server using the [`Default`] implementation
 	pub fn new() -> Self {
-		Default::default()
+		Self::default()
 	}
 
 	/// Performs any startup tasks.
@@ -45,6 +45,9 @@ async fn main() {
 	tracing_subscriber::fmt::init();
 
 	let config = config::get_config().expect("failed to load config");
+
+	let server_config: config::Server =
+		config::server_config(&config).expect("failed to get server config key");
 
 	let mut server = Server::new();
 	server.initialize();

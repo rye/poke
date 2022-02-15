@@ -1,4 +1,14 @@
+use std::net::IpAddr;
+
 use config::Config;
+
+use serde::Deserialize;
+
+#[derive(serde::Deserialize)]
+pub(crate) struct Server {
+	host: IpAddr,
+	port: u16,
+}
 
 pub(crate) fn get_config() -> Result<Config, config::ConfigError> {
 	let mut config = Config::default();
@@ -9,4 +19,8 @@ pub(crate) fn get_config() -> Result<Config, config::ConfigError> {
 	config.merge(config::File::with_name("config"))?;
 
 	Ok(config)
+}
+
+pub(crate) fn server_config(config: &Config) -> Result<Server, config::ConfigError> {
+	config.get("server")
 }
