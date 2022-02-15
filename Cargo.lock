@@ -814,6 +814,7 @@ dependencies = [
  "log",
  "pretty_env_logger",
  "tokio",
+ "tower",
  "warp",
 ]
 
