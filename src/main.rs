@@ -1,5 +1,3 @@
-use axum::{routing::get, Router};
-
 mod config;
 mod routes;
 
@@ -22,7 +20,7 @@ impl Server {
 	pub(crate) async fn serve(&mut self) -> Result<(), RuntimeError> {
 		let bind_addr = self.config.bind_addr();
 
-		let router = Router::new().route("/ping", get(routes::ping));
+		let router = routes::router();
 
 		Ok(
 			axum::Server::bind(&bind_addr)
