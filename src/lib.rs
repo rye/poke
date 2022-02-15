@@ -18,6 +18,7 @@ impl Server {
 	/// Sets up the filters to use when handling requests.
 	///
 	/// Any work done here is done at startup before the server begins serving requests.
+	#[deprecated = "warp is being removed"]
 	fn filters(
 		&self,
 	) -> impl warp::Filter<Extract = impl warp::Reply, Error = warp::Rejection> + Clone {
